@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var saleID = 1029
+
 
 var BNBsaleSchema = new Schema({
    
@@ -44,8 +44,8 @@ var BNBsaleSchema = new Schema({
         saleOwner: {type:String, default:'0x0000000000000000000000000000000000000000'},
         listingDate: {type:Date, default:()=> Date.now()},
         description:String,
-        saleID:{type:Number, default: ()=>{return saleID++}}
+        saleID:Number
     } 
 });
 
-module.exports = mongoose.model('BNBsale', BNBsaleSchema);
+module.exports = mongoose.model('bnbsale', BNBsaleSchema);

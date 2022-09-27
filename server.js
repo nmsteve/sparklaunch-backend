@@ -4,7 +4,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 require('dotenv').config()
 
-
 var Sale = require('./model/BNBsale');
 
 mongoose.connect(
@@ -34,8 +33,6 @@ app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET");
   next();
 });
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -106,6 +103,18 @@ app.get('/sale', function(request, response) {
             response.send(sale);
         }
     });
+
+});
+
+app.get('/sale:id', function(request, response) {
+
+  Sale.find({_id:request.params.id},function(err, sale) {
+      if (err) {
+          response.status(500).send({error: err.message});
+      } else {
+          response.send(sale);
+      }
+  });
 
 });
 
