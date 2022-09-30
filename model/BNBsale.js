@@ -44,7 +44,9 @@ var BNBsaleSchema = new Schema({
         saleOwner: {type:String, default:'0x0000000000000000000000000000000000000000'},
         listingDate: {type:Date, default:()=> Date.now()},
         description:String,
-        saleID:Number
+        saleID:Number,
+        deployed:{type:Boolean,default:()=> false},
+        featured:{type:Boolean,default:()=> false},
     } 
 });
 

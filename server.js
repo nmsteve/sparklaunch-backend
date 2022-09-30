@@ -106,9 +106,21 @@ app.get('/sale', function(request, response) {
 
 });
 
-app.get('/sale:id', function(request, response) {
+app.get('/sale/id:id', function(request, response) {
 
   Sale.find({_id:request.params.id},function(err, sale) {
+      if (err) {
+          response.status(500).send({error: err.message});
+      } else {
+          response.send(sale);
+      }
+  });
+
+});
+
+app.get('/sale/deployed:dpy', function(request, response) {
+
+  Sale.find({'saleDetails.deployed':request.params.dpy},function(err, sale) {
       if (err) {
           response.status(500).send({error: err.message});
       } else {
@@ -178,7 +190,6 @@ app.put('/sale', function(request, response) {
 
  }
 )
-
 
 port = process.env.PORT|| 3001
 
