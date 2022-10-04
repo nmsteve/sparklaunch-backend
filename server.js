@@ -30,7 +30,7 @@ db.once("`open", function () {
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST, GET");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT");
   next();
 });
 
@@ -106,7 +106,7 @@ app.get('/sale', function(request, response) {
 
 });
 
-app.get('/sale/id:id', function(request, response) {
+app.get('/sale/:id', function(request, response) {
 
   Sale.find({_id:request.params.id},function(err, sale) {
       if (err) {
@@ -116,9 +116,21 @@ app.get('/sale/id:id', function(request, response) {
       }
   });
 
+}); 
+
+app.get('/sale/saleid/:saleid', function(request, response) {
+
+  Sale.find({'saleDetails.saleID':request.params.saleid},function(err, sale) {
+      if (err) {
+          response.status(500).send({error: err.message});
+      } else {
+          response.send(sale);
+      }
+  });
+
 });
 
-app.get('/sale/deployed:dpy', function(request, response) {
+app.get('/sale/deployed/:dpy', function(request, response) {
 
   Sale.find({'saleDetails.deployed':request.params.dpy},function(err, sale) {
       if (err) {
@@ -189,6 +201,27 @@ app.put('/sale', function(request, response) {
     )
 
  }
+)
+
+app.put('/sale/deploy/:id', function(request, response) {
+
+  Sale.updateOne({_id:request.params.id},
+   {
+   'saleDetails.deployed': request.body.deployed,
+   'saleDetails.saleAddress': request.body.saleAddress
+      
+   },
+  
+   function(err,sale){
+     if(err) {
+         response.status(500).send({error:err.message})
+     }else {
+       response.send(sale)
+     }
+   }
+   )
+
+}
 )
 
 port = process.env.PORT|| 3001
