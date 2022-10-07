@@ -142,6 +142,18 @@ app.get('/sale/deployed/:dpy', function(request, response) {
 
 });
 
+app.get('/sale/featured/:ftd', function(request, response) {
+
+  Sale.find({'saleDetails.featured':request.params.ftd},function(err, sale) {
+      if (err) {
+          response.status(500).send({error: err.message});
+      } else {
+          response.send(sale);
+      }
+  });
+
+});
+
 app.delete('/sale', function(request, response) {
 
   Sale.deleteMany({'saleDetails.saleID':request.body.saleID}, function(err, sale)
