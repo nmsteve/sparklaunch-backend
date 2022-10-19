@@ -120,7 +120,7 @@ app.get('/sale/:id', function (request, response) {
 
 app.get('/sale/name/:nm', function (request, response) {
 
-  Sale.find({ 'saleToken.name': request.params.name }, function (error, sale) {
+  Sale.find({ 'saleToken.name': request.params.nm }, function (error, sale) {
     if (error) {
       response.status(500).send({ error: error.message });
     } else {
@@ -248,8 +248,8 @@ app.put('/sale/deploy/:id', function (request, response) {
 }
 )
 
-port = process.env.PORT || 3001
+port = process.env.PORT || 3005
 
 app.listen(port, function () {
-  console.log("SparkLaunch running on port 3001...");
+  console.log("SparkLaunch running on port 3005...");
 });
