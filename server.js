@@ -53,14 +53,18 @@ app.post('/sale', function (request, response) {
       saleParams: {
         softCap: request.body.saleParams.softCap,
         hardCap: request.body.saleParams.hardCap,
-        price: request.body.saleParams.price,
         startDate: request.body.saleParams.startDate,
         endDate: request.body.saleParams.endDate,
         minBuy: request.body.saleParams.minBuy,
         maxBuy: request.body.saleParams.maxBuy,
-        firstRelease: request.body.saleParams.firstRelease,
-        eachRelease: request.body.saleParams.eachRelease,
-        vestingDays: request.body.saleParams.vestingDays
+        price: request.body.saleParams.price,
+        saleOwner: request.body.saleParams.saleOwner,
+        round1: request.body.saleParams.round1,
+        round2: request.body.saleParams.round2,
+        round3: request.body.saleParams.round3,
+        round4: request.body.saleParams.round4,
+        round5: request.body.saleParams.round5,
+        publicroundDelta: request.body.saleParams.publicroundDelta,
       },
 
       saleLinks: {
@@ -69,7 +73,6 @@ app.post('/sale', function (request, response) {
         git: request.body.saleLinks.git,
         insta: request.body.saleLinks.insta,
         reddit: request.body.saleLinks.reddit,
-
         web: request.body.saleLinks.web,
         twitter: request.body.saleLinks.twitter,
         telegram: request.body.saleLinks.telegram,
@@ -78,9 +81,8 @@ app.post('/sale', function (request, response) {
       },
 
       saleDetails: {
-        saleAddress: request.body.saleDetails.saleAddress,
-        saleOwner: request.body.saleDetails.saleOwner,
         description: request.body.saleDetails.description,
+        whilelist: request.body.saleDetails.whilelist
       },
 
     }, function (err, savedSale) {
